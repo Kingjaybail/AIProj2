@@ -1,0 +1,123 @@
+/* ---------- WRAPPER ---------- */
+.auth-wrapper {
+  height: 100vh;
+  background: #f5f6fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.dark .auth-wrapper {
+  background: #121212;
+}
+
+/* ---------- CARD ---------- */
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 40px 36px;
+  border-radius: 16px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.dark .auth-card {
+  background: #1f1f1f;
+}
+
+/* ---------- TITLE ---------- */
+.auth-title {
+  font-size: 28px;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+/* ---------- FORM ---------- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-form input {
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  background: #f8f8f8;
+  transition: 0.2s;
+}
+
+.dark .auth-form input {
+  background: #2c2c2c;
+  border-color: #444;
+  color: white;
+}
+
+.auth-form input:focus {
+  border-color: #6a5acd;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.25);
+}
+
+/* ---------- BUTTON ---------- */
+.auth-btn {
+  padding: 12px;
+  background: #6a5acd;
+  color: white;
+  font-size: 17px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.auth-btn:hover {
+  background: #5546c8;
+}
+
+.dark .auth-btn {
+  background: #7d6cff;
+}
+
+/* ---------- LINK ---------- */
+.auth-link {
+  margin-top: 18px;
+  font-size: 14px;
+}
+
+.auth-link a {
+  color: #6a5acd;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+}
+
+.dark .auth-link a {
+  color: #9f93ff;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes fadeIn {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.auth-error {
+  color: #f87171;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-align: center;
+}

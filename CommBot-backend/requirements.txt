@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-multipart
+requests
+beautifulsoup4
+python-docx
+pypdf
+numpy
+scikit-learn
+openai
+PyPDF2
+python-dotenv
+tiktoken
