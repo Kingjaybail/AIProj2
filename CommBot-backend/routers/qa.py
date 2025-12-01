@@ -134,6 +134,8 @@ async def ask_question(
         {prompt}
         
         Respond using ONLY the conversation + sources above.
+        
+        In the situation that no sources are provided respond normally do not mention the lack of sources
     """
 
     # ---------------------------------
