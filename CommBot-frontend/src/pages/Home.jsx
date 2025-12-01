@@ -26,7 +26,7 @@ export default function Home() {
         const user_id = localStorage.getItem("user_id");
         if (!user_id) return (window.location.href = "/");
 
-        fetch(`http://localhost:8000/chats/${user_id}`)
+        fetch(import.meta.env.VITE_BACKEND_URL + `/chats/${user_id}`)
             .then(res => res.json())
             .then(data => {
                 setChats(data);
@@ -37,7 +37,7 @@ export default function Home() {
 
                     setActiveChatId(selected);
 
-                    fetch(`http://localhost:8000/chats/get/${selected}`)
+                    fetch(import.meta.env.VITE_BACKEND_URL +`/chats/get/${selected}`)
                         .then(res => res.json())
                         .then(chat => setMessages(JSON.parse(chat.messages)));
                 }
@@ -60,7 +60,7 @@ export default function Home() {
     };
 
     const updateChatTitle = async (chatId, newTitle) => {
-        await fetch("http://localhost:8000/chats/update_title", {
+        await fetch(import.meta.env.VITE_BACKEND_URL + "/chats/update_title", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ chat_id: chatId, title: newTitle }),
@@ -95,7 +95,7 @@ export default function Home() {
         if (!prompt.trim() || !activeChatId) return;
 
         // Store user message in DB
-        await fetch("http://localhost:8000/chats/append", {
+        await fetch(import.meta.env.VITE_BACKEND_URL + "/chats/append", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -122,7 +122,7 @@ export default function Home() {
         files.forEach(f => form.append("files", f, f.name));
         urls.forEach(u => form.append("urls", u));
 
-        const res = await fetch("http://localhost:8000/ask", {
+        const res = await fetch(import.meta.env.VITE_BACKEND_URL +"/ask", {
             method: "POST",
             body: form,
         });
@@ -131,7 +131,7 @@ export default function Home() {
         setIsTyping(false);
         setPrompt("");
         // Store assistant message in DB
-        await fetch("http://localhost:8000/chats/append", {
+        await fetch(import.meta.env.VITE_BACKEND_URL + "/chats/append", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -159,7 +159,7 @@ export default function Home() {
     const handleNewChat = async () => {
         const user_id = localStorage.getItem("user_id");
 
-        const res = await fetch("http://localhost:8000/chats/create", {
+        const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/chats/create", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ user_id, title: "New Chat" }),
@@ -178,7 +178,7 @@ export default function Home() {
         setActiveChatId(id);
         localStorage.setItem("active_chat_id", id);
 
-        const res = await fetch(`http://localhost:8000/chats/get/${id}`);
+        const res = await fetch(import.meta.env.VITE_BACKEND_URL + `/chats/get/${id}`);
         const chat = await res.json();
 
         setMessages(JSON.parse(chat.messages));
@@ -187,7 +187,7 @@ export default function Home() {
     };
 
     const handleDeleteChat = async (id) => {
-        await fetch(`http://localhost:8000/chats/${id}`, { method: "DELETE" });
+        await fetch(import.meta.env.VITE_BACKEND_URL + `/chats/${id}`, { method: "DELETE" });
 
         setChats(prev => prev.filter(c => c.id !== id));
 
@@ -197,7 +197,7 @@ export default function Home() {
             localStorage.setItem("active_chat_id", next || "");
 
             if (next) {
-                const res = await fetch(`http://localhost:8000/chats/get/${next}`);
+                const res = await fetch(import.meta.env.VITE_BACKEND_URL + `/chats/get/${next}`);
                 const chat = await res.json();
                 setMessages(JSON.parse(chat.messages));
             } else {

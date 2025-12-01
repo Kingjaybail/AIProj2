@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from routers import qa, auth, chats
 from db import init_db
 
-app = FastAPI(title="LLM Agent Backend")
+app = FastAPI(title="CommBot Backend")
 init_db()
 
 app.add_middleware(

@@ -1,1 +1,89 @@
-CommBot-backend/ .env
+# ==========================
+# GLOBAL IGNORES
+# ==========================
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environments
+.venv/
+env/
+venv/
+
+# ==================================
+# BACKEND (FastAPI) IGNORE RULES
+# ==================================
+
+# Environment variables (IMPORTANT)
+CommBot-backend/.env
+
+# Python cache & build
+CommBot-backend/__pycache__/
+CommBot-backend/**/*.pyc
+
+# Virtual environment inside backend (if ever created)
+CommBot-backend/venv/
+CommBot-backend/env/
+
+# SQLite database (if created at runtime)
+CommBot-backend/*.db
+CommBot-backend/database/*.db
+
+# Logs
+CommBot-backend/*.log
+
+# ==================================
+# FRONTEND (Vite React) IGNORE RULES
+# ==================================
+
+# Node modules
+CommBot-frontend/node_modules/
+node_modules/
+
+# Build output
+CommBot-frontend/dist/
+dist/
+
+# Local environment files
+CommBot-frontend/.env
+CommBot-frontend/.env.local
+CommBot-frontend/.env.development
+CommBot-frontend/.env.production
+
+# Vite cache
+CommBot-frontend/.vite
+
+# NPM logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==================================
+# IDE / EDITOR IGNORE RULES
+# ==================================
+
+# JetBrains (PyCharm/WebStorm)
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+
+# ==================================
+# MISC
+# ==================================
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+

@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+
+  backend:
+    build: ./CommBot-backend
+    container_name: commbot-backend
+    env_file:
+      - ./CommBot-backend/.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./CommBot-backend:/app
+    restart: unless-stopped
+
+  frontend:
+    build: ./CommBot-frontend
+    container_name: commbot-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
