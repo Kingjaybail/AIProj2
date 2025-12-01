@@ -1,3 +1,5 @@
+from typing import Optional, List
+
 from fastapi import APIRouter
 from pydantic import BaseModel
 from db import create_chat, update_chat_title, append_message, get_user_chats, get_chat, delete_chat
@@ -47,7 +49,19 @@ def delete_chat_route(chat_id: int):
     return {"success": True}
 
 
+class ChatAppend(BaseModel):
+    chat_id: int
+    role: str
+    text: str
+    sources: Optional[list] = []
+
+
 @router.post("/append")
 def append_message_route(body: ChatAppend):
-    append_message(body.chat_id, body.role, body.text)
+    append_message(
+        body.chat_id,
+        body.role,
+        body.text,
+        body.sources
+    )
     return {"status": "ok"}

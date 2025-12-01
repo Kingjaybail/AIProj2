@@ -109,8 +109,7 @@ def create_chat(user_id: int, title: str = "New Chat") -> Dict[str, Any]:
     return dict(chat)
 
 
-def append_message(chat_id: int, role: str, text: str) -> List[Dict[str, str]]:
-    """Append a message to a chat session."""
+def append_message(chat_id: int, role: str, text: str, sources=None):
     conn = get_conn()
 
     chat = conn.execute(
@@ -121,7 +120,12 @@ def append_message(chat_id: int, role: str, text: str) -> List[Dict[str, str]]:
         return []
 
     messages = json.loads(chat["messages"])
-    messages.append({"role": role, "text": text})
+
+    messages.append({
+        "role": role,
+        "text": text,
+        "sources": sources or []
+    })
 
     conn.execute(
         """
@@ -134,6 +138,8 @@ def append_message(chat_id: int, role: str, text: str) -> List[Dict[str, str]]:
     conn.commit()
 
     return messages
+
+
 
 
 def get_user_chats(user_id: int) -> List[Dict[str, Any]]:

@@ -7,7 +7,7 @@ load_dotenv()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-CHAT_MODEL = "gpt-4o"  # or "gpt-4o-mini" or "gpt-4.1"
+CHAT_MODEL = "gpt-4o"
 
 def build_context_prompt(question: str, context_chunks: List[Tuple[str, str]]) -> str:
     print("getting response...")

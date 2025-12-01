@@ -19,7 +19,6 @@ def _read_pdf(content: bytes) -> str:
     return "\n".join(pages)
 
 async def extract_from_files(files: List[UploadFile]) -> List[Tuple[str, str]]:
-    print(files)
     results = []
 
     for f in files:
@@ -55,21 +54,27 @@ async def extract_from_files(files: List[UploadFile]) -> List[Tuple[str, str]]:
 
 
 
-def extract_from_urls(urls: List[str]) -> List[Tuple[str, str]]:
+def extract_from_urls(urls):
     results = []
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    }
+
     for url in urls:
-        url = url.strip()
-        if not url:
-            continue
         try:
-            resp = requests.get(url, timeout=10)
-            soup = BeautifulSoup(resp.text, "html.parser")
-            for script in soup(["script", "style"]):
-                script.decompose()
-            text = soup.get_text(separator=" ")
-            text = " ".join(text.split())
-            if text:
-                results.append((f"url:{url}", text))
-        except Exception:
-            continue
+            response = requests.get(url, timeout=8, headers=headers)
+            response.raise_for_status()
+
+            soup = BeautifulSoup(response.text, "html.parser")
+            text = soup.get_text(separator="\n", strip=True)
+
+            results.append((url, text))
+
+        except Exception as e:
+            print("URL fetch failed:", url, e)
+            results.append((url, ""))
+
+    print(results)
     return results
+
